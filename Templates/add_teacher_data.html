@@ -1,0 +1,53 @@
+<html>
+
+<head>
+     <title>Add Data for Teacher</title>
+</head>
+
+<style>
+
+     .main-heading{
+          text-align: center;
+          padding: 20px 0 ;
+     }
+
+     .teacher-form{
+          /* border: 1px solid red; */
+          text-align: center;
+     }
+
+     .teacher-form input{
+          margin: 10px;
+          height: 40px;
+          width: 500px;
+     }
+     .teacher-form button{
+          height: 40px;
+     }
+
+
+</style>
+
+<body>
+
+     <h1 class="main-heading"> Teacher Entry Form</h1>
+
+     <!-- <form class="student-form" action="/opr/get-add-data/" method="get" > -->
+          <form class="teacher-form" action="{% url 'teacher_add' %}" method="post" >
+          {% csrf_token %}
+
+          <h3>Fill this Form to add Teacher</h3>
+
+          <input type="text" placeholder="Enter First Name" name="first_name"><br>
+          <input type="text" placeholder="Enter Last Name"  name="last_name"><br>
+          <input type="text" placeholder="Enter Subject"    name="subject"><br>
+          <input type="number" placeholder="Enter Age"      name="age">
+
+          <button type="submit">Submit</button>
+
+     </form>
+
+
+</body>
+
+</html>
