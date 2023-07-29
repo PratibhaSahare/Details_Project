@@ -1,9 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, request
 
 # import models in views
 
-from . models import Student,Teacher
+from . models import *
 
 # Create your views here.
 
@@ -47,7 +47,7 @@ def student_add(request):
 def student_details(request):
      
      student_data = Student.objects.all()
-     teacher_data = Teacher.objects.all()
+     
      
      # for student in student_data:
      #      print(student.first_name,student.last_name,student.age)
@@ -56,7 +56,7 @@ def student_details(request):
      
      # return HttpResponse("Hello, world!")
      
-     return render(request,'all_data.html',{'student_data':student_data,'teacher_data':teacher_data})
+     return render(request,'all_data.html',{'student_data':student_data,'teacher_data':student_data})
 
      # add teachers data from templates and then add into database
 
@@ -75,3 +75,39 @@ def teacher_add(request):
           return HttpResponse("data added")
 
      return render(request,'add_teacher_data.html')
+
+#Teacher All Details
+from django.shortcuts import render, redirect
+from .models import Student, Study
+
+# Teacher Details
+
+def teacher_details(request):
+    teacher_data = Student.objects.all()
+    return render(request, 'teacher_details.html', {'teacher_data': teacher_data})
+
+# Study Details
+
+def my_study(request):
+    if request.method == "POST":
+        print(request.POST)
+
+        subject = request.POST['subject']
+        time = request.POST['time']
+        message = request.POST['message']
+
+        try:
+            if request.POST['is_complete'] == "True":
+                is_completed = True
+            else:
+                is_completed = False
+        except:
+            is_completed = False
+
+        Study.objects.create(subject=subject, time=time, message=message, is_complete=is_completed)
+        return redirect('my_study_data')
+
+    else:
+        study_details = Study.objects.all()
+        print(study_details)
+        return render(request, 'study_form.html', {'study_details': study_details})

@@ -25,3 +25,15 @@ class Teacher(models.Model):
      def __str__(self):
           return self.first_name + ' ' + self.last_name
      
+
+class Study(models.Model):
+     
+     date = models.DateField(auto_now=True)
+     subject = models.CharField(max_length=55,default='Unknown')
+     time = models.DecimalField(max_digits=5,decimal_places=2)
+     message =models.CharField(max_length=100,default='Unknown')
+     is_complete = models.BooleanField(default=True)
+     
+     
+     def __str__(self):
+         return f'{self.subject}  - {self.date}'

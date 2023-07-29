@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+     <title>ALL DATA</title>
+</head>
+
+<body>
+
+
+   
+     <h3>teacher data</h3>
+
+     {% for teacher in teacher_data %}
+          First Name - {{teacher.first_name}}<br>
+          last Name - {{teacher.last_name}}<br>
+          Subject - {{teacher.subject}} <br>
+          Age - {{teacher.age}}<br>
+          
+     {% endfor %}
+     
+
+</body>
+
+</html>
